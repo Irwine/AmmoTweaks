@@ -131,7 +131,7 @@ namespace AmmoTweaks
             string prefix = "";
             string pattern = "Arrow$|Bolt$";
 
-            if (name.Contains("Flèche"))
+            if (name.Contains("Arrow"))
             {
                 prefix = "Flèche";
             }
