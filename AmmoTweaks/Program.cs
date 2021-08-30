@@ -83,7 +83,7 @@ namespace AmmoTweaks
 
                 }
 
-                if (Settings.Renaming.DoRenaming) ammo.Name = RenameAmmo(ammo);
+                if (Settings.Renaming.DoRenaming) i18nAmmoName = RenameAmmo(ammo);
             }
 
             if (Settings.Loot.Mult != 1)
@@ -132,7 +132,7 @@ namespace AmmoTweaks
             if (i18nAmmoName is not string name) return "";
             string oldname = name;
             string prefix = "";
-            string pattern = "Arrow$|Carreau$";
+            string pattern = "Arrow$|Bolt$";
 
             if (name.Contains("Arrow"))
             {
