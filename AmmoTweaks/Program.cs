@@ -126,15 +126,12 @@ namespace AmmoTweaks
 
         private static String RenameAmmo(IAmmunitionGetter ammo)
         {
-            string i18nAmmoName = "";
-            //ammo.Name.TryLookup(Language.French, out i18nAmmoName);
-            i18nAmmoName ??= ammo.Name.String;
             if (ammo.Name?.String is not string name) return "";
             string oldname = name;
             string prefix = "";
-            string pattern = "Arrow$|Bolt$";
+            string pattern = "Flèche$|Carreau$";
 
-            if (name.Contains("Arrow"))
+            if (name.Contains("Fleche"))
             {
                 prefix = "Flèche";
             }
