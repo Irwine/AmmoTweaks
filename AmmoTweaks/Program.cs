@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using Mutagen.Bethesda.FormKeys.SkyrimSE;
 using System.Threading.Tasks;
 using System.IO;
+using System.Text;
 using AmmoTweaks.Settings;
 
 namespace AmmoTweaks
@@ -129,9 +130,9 @@ namespace AmmoTweaks
             if (ammo.Name?.String is not string name) return "";
             string oldname = name;
             string prefix = "";
-            string pattern = "Flèche$|Carreau$";
+            string pattern = Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes("Flèche$|Carreau$"));
 
-            if (name.Contains("Fleche"))
+            if (name.Contains(Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes("Flèche")))
             {
                 prefix = "Flèche";
             }
