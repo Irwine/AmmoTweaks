@@ -56,6 +56,9 @@ namespace AmmoTweaks
             {
                 var ammo = state.PatchMod.Ammunitions.GetOrAddAsOverride(ammogetter);
                 ammo.Weight = 0;
+                
+                ammo.Name?.TryLookup(Language.French, out string i18nAmmoName);
+                ammo.Name = i18nAmmoName ?? ammo.Name;
 
                 if (Settings.Damage.DoRescaling && ammo.Damage != 0)
                 {
@@ -125,15 +128,12 @@ namespace AmmoTweaks
             }
         }
 
-        private static String RenameAmmo(ammo)
+        private static String RenameAmmo(IAmmunitionGetter ammo)
         {
             if (ammo.Name?.String is not string name) return "";
             string oldname = name;
             string prefix = "";
             string pattern = Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes("Flèche$|Carreau$"));
-            
-            ammo.Name?.TryLookup(Language.French, out string i18nAmmoName);
-            ammo.Name = i18nAmmoName ?? ammo.Name;
 
             if (name.Contains(Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes("Flèche"))))
             {
