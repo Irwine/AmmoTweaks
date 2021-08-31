@@ -125,7 +125,7 @@ namespace AmmoTweaks
             }
         }
 
-        private static String RenameAmmo(IAmmunitionGetter ammo)
+        private static String RenameAmmo(ammo)
         {
             if (ammo.Name?.String is not string name) return "";
             string oldname = name;
