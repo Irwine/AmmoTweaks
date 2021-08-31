@@ -134,7 +134,7 @@ namespace AmmoTweaks
 
             if (name.Contains(Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes("Flèche"))))
             {
-                prefix = "Flèche";
+                prefix = Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes("Flèche"));
             }
             else if (name.Contains("Carreau"))
             {
