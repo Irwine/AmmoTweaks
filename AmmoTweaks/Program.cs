@@ -131,6 +131,9 @@ namespace AmmoTweaks
             string oldname = name;
             string prefix = "";
             string pattern = Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes("Flèche$|Carreau$"));
+            
+            ammo.Name?.TryLookup(Language.French, out i18nAmmoName);
+            ammo.Name = i18nAmmoName ?? ammo.Name;
 
             if (name.Contains(Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes("Flèche"))))
             {
