@@ -59,7 +59,9 @@ namespace AmmoTweaks
                 
                 string i18nAmmoName = "";
                 ammo.Name?.TryLookup(Language.French, out i18nAmmoName);
-                ammo.Name = Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes(i18nAmmoName)) ?? ammo.Name;
+                if (i18nAmmoName != null) {
+                    ammo.Name = Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes(i18nAmmoName));
+                }
 
                 if (Settings.Damage.DoRescaling && ammo.Damage != 0)
                 {
