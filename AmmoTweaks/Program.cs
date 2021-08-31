@@ -57,7 +57,8 @@ namespace AmmoTweaks
                 var ammo = state.PatchMod.Ammunitions.GetOrAddAsOverride(ammogetter);
                 ammo.Weight = 0;
                 
-                ammo.Name?.TryLookup(Language.French, out string i18nAmmoName);
+                string i18nAmmoName = "";
+                ammo.Name?.TryLookup(Language.French, out i18nAmmoName);
                 ammo.Name = i18nAmmoName ?? ammo.Name;
 
                 if (Settings.Damage.DoRescaling && ammo.Damage != 0)
