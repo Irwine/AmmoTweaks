@@ -15,3 +15,6 @@ Configuration file (Data/config.json)
 - speedarrow: new arrow speed.
 - speedbolt: new bolt speed.
 - gravity: new gravity value for both arrows and bolts.
+
+### Version à utiliser
+0.31 et 0.19.3
