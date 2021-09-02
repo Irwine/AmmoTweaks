@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using Mutagen.Bethesda.FormKeys.SkyrimSE;
 using System.Threading.Tasks;
 using System.IO;
+using System.Text;
 using AmmoTweaks.Settings;
 
 namespace AmmoTweaks
@@ -55,6 +56,12 @@ namespace AmmoTweaks
             {
                 var ammo = state.PatchMod.Ammunitions.GetOrAddAsOverride(ammogetter);
                 ammo.Weight = 0;
+                
+                string i18nAmmoName = "";
+                ammo.Name?.TryLookup(Language.French, out i18nAmmoName);
+                if (i18nAmmoName != null) {
+                    ammo.Name = Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes(i18nAmmoName));
+                }
 
                 if (Settings.Damage.DoRescaling && ammo.Damage != 0)
                 {
@@ -129,15 +136,15 @@ namespace AmmoTweaks
             if (ammo.Name?.String is not string name) return "";
             string oldname = name;
             string prefix = "";
-            string pattern = "Arrow$|Bolt$";
+            string pattern = Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes("Flèche$|Carreau$"));
 
-            if (name.Contains("Arrow"))
+            if (name.Contains(Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes("Flèche"))))
             {
-                prefix = "Arrow";
+                prefix = Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes("Flèche"));
             }
-            else if (name.Contains("Bolt"))
+            else if (name.Contains("Carreau"))
             {
-                prefix = "Bolt";
+                prefix = "Carreau";
             }
             else
             {
