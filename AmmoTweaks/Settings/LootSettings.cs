@@ -10,6 +10,6 @@ namespace AmmoTweaks.Settings
     public class LootSettings
     {
         [SynthesisOrder]
-        public float Mult = 1f;
+        public float Multiplicateur = 1f;
     }
 }
