@@ -1,20 +1,20 @@
 # AmmoTweaks
-Configurable patcher intended as a WACCF-friendly alternative to ABT.
-Will rescale ammo damage between a configurable minimum and maximum while removing ammo weight as well as adjusting projectile speed and gravity.
-Can optionally rename ammo for better sorting and adjust recoverable ammo found on bodies.
+Un patcher configurable conçu comme une alternative WACCF-friendly à ABT.
+Rééchelonne les dégâts des projectiles entre un minimum et un maximum configurables tout en supprimant leur poids et en ajustant leur vitesse et leur gravité.
+Peut éventuellement renommer les projectiles pour un meilleur tri et ajuster le nombre d'entre elles récupérables sur les corps.
 
-## Settings
-Configuration file (Data/config.json)
-- rescaling: Enables new damage scaling. Set to false to disable.
-- minDamage: Allowed minimum damage.
-- maxDamage: Allowed maximum damage.
-- lootMult: Modifies amount of ammo found on bodies. Values below 1 will reduce found ammo while values above 1 will increase it. Set to 1 to disable.
-- renaming: Used to rename ammunition using the following scheme: "Iron Arrow" -> "Arrow - Iron". Set to true to enable.
-- separator: Separator used if renaming is enabled. For example " - " and  ": "
-- speedchanges: Enables projectile speed and gravity tweaks. Set to false to disable.
-- speedarrow: new arrow speed.
-- speedbolt: new bolt speed.
-- gravity: new gravity value for both arrows and bolts.
+## Paramètres
+Fichier de configuration (Data/config.json), les paramètres sont configuables via synthesis
+- Reechelonner : Active la nouvelle échelle des dégâts. Mettre à false pour désactiver.
+- Degats Min : Dégâts minimums autorisés.
+- Degats Max : Dégâts maximums autorisés.
+- Multiplicateur : Modifie la quantité de projectiles trouvés sur les corps. Les valeurs inférieures à 1 réduiront la quantité de projectiles trouvés, tandis que les valeurs supérieures à 1 l'augmenteront. Mettre à 1 pour désactiver.
+- Renommer : Utilisé pour renommer les munitions en utilisant le schéma suivant : "Iron Arrow" -> "Arrow - Iron". Mettre à true pour activer.(Paramètres inutiles en français)
+- Separateur : Séparateur utilisé si le renommage est activé. Par exemple, " - " ou " : ".
+- Modifier Projectiles : Active les modifications de la vitesse et de la gravité des projectiles. Mettez false pour désactiver.
+- Vitesse Fleches : Nouvelle vitesse des flèches.
+- Vitesse Carreau: Nouvelle vitesse des carreaux.
+- Gravite : Nouvelle valeur de gravité pour les flèches et les carreaux.
 
-### Version à utiliser
+## Version à utiliser
 0.31 et 0.19.3
