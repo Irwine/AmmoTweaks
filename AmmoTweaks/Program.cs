@@ -44,8 +44,8 @@ namespace AmmoTweaks
                 if (!ammogetter.Flags.HasFlag(Ammunition.Flag.NonPlayable))
                 {
                     patchammo.Add(ammogetter);
-                    var dmg = ammogetter.Degats;
-                    if (ammogetter.Degats == 0) continue;
+                    var dmg = ammogetter.Damage;
+                    if (ammogetter.Damage == 0) continue;
                     if (dmg < vmin) vmin = dmg;
                     if (dmg > vmax && dmg <= Settings.Degats.DegatsMax) vmax = dmg;
                     if (dmg > Settings.Degats.DegatsMax && ammogetter.Name?.String is string name) overpowered.Add(name);
@@ -67,7 +67,7 @@ namespace AmmoTweaks
                 {
                     var dmg = ammo.Damage;
                     if (dmg > Settings.Degats.DegatsMax) ammo.Damage = Settings.Degats.DegatsMax;
-                    else ammo.Damage = (float)Math.Round(((ammo.Damage - vmin) / (vmax - vmin)) * (Settings.Degats.DegatsMax - Settings.Degats.DegatsMin) + Settings.Damage.DegatsMin);
+                    else ammo.Damage = (float)Math.Round(((ammo.Damage - vmin) / (vmax - vmin)) * (Settings.Degats.DegatsMax - Settings.Degats.DegatsMin) + Settings.Degats.DegatsMin);
                     Console.WriteLine($"Changing {ammo.Name} damage from {dmg} to {ammo.Damage}.");
                 }
 
