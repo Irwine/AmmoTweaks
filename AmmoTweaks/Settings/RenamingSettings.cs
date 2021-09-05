@@ -13,6 +13,6 @@ namespace AmmoTweaks.Settings
         public bool Renommer;
 
         [SynthesisOrder]
-        public string Separator = " - ";
+        public string Separateur = " - ";
     }
 }
