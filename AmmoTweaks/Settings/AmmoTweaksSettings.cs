@@ -10,15 +10,15 @@ namespace AmmoTweaks.Settings
     public class AmmoTweaksSettings
     {
         [SynthesisOrder]
-        public DamageSettings Damage = new();
+        public DamageSettings Degats = new();
 
         [SynthesisOrder]
-        public RenamingSettings Renaming = new();
+        public RenamingSettings Renommer = new();
 
         [SynthesisOrder]
-        public SpeedSettings Speed = new();
+        public SpeedSettings Vitesse = new();
 
         [SynthesisOrder]
-        public LootSettings Loot = new();
+        public LootSettings Butin = new();
     }
 }
