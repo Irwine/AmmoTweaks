@@ -13,7 +13,7 @@ namespace AmmoTweaks.Settings
         public DamageSettings Degats = new();
 
         [SynthesisOrder]
-        public RenamingSettings Renommer = new();
+        public RenamingSettings Renommage = new();
 
         [SynthesisOrder]
         public SpeedSettings Vitesse = new();
