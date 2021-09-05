@@ -1,4 +1,4 @@
-# AmmoTweaks
+# Ammo Tweaks
 Un patcher configurable conçu comme une alternative WACCF-friendly à ABT.
 Rééchelonne les dégâts des projectiles entre un minimum et un maximum configurables tout en supprimant leur poids et en ajustant leur vitesse et leur gravité.
 Peut éventuellement renommer les projectiles pour un meilleur tri et ajuster le nombre d'entre elles récupérables sur les corps.
