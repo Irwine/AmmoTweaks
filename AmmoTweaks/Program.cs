@@ -71,21 +71,21 @@ namespace AmmoTweaks
                     Console.WriteLine($"Changing {ammo.Name} damage from {dmg} to {ammo.Damage}.");
                 }
 
-                if (Settings.Speed.DoSpeedChanges && !blacklist.Contains(ammo.Projectile) && ammo.Projectile.TryResolve(state.LinkCache, out var proj)
-                        && (proj.Gravity != Settings.Speed.Gravity
-                        || (proj.Speed != Settings.Speed.ArrowSpeed && ammo.Flags.HasFlag(Ammunition.Flag.NonBolt))
-                        || (proj.Speed != Settings.Speed.BoltSpeed && !ammo.Flags.HasFlag(Ammunition.Flag.NonBolt))))
+                if (Settings.Vitesse.ModifierProjectiles && !blacklist.Contains(ammo.Projectile) && ammo.Projectile.TryResolve(state.LinkCache, out var proj)
+                        && (proj.Gravity != Settings.Vitesse.Gravite
+                        || (proj.Speed != Settings.Vitesse.VitesseFleches && ammo.Flags.HasFlag(Ammunition.Flag.NonBolt))
+                        || (proj.Speed != Settings.Vitesse.VitesseCarreau && !ammo.Flags.HasFlag(Ammunition.Flag.NonBolt))))
                 {
                     var projectile = state.PatchMod.Projectiles.GetOrAddAsOverride(proj);
                     Console.WriteLine($"Adjusting {proj.Name} projectile.");
-                    projectile.Gravity = Settings.Speed.Gravity;
+                    projectile.Gravity = Settings.Vitesse.Gravite;
                     if (ammo.Flags.HasFlag(Ammunition.Flag.NonBolt))
                     {
-                        projectile.Speed = Settings.Speed.ArrowSpeed;
+                        projectile.Speed = Settings.Vitesse.VitesseFleches;
                     }
                     else
                     {
-                        projectile.Speed = Settings.Speed.BoltSpeed;
+                        projectile.Speed = Settings.Vitesse.VitesseCarreau;
                     }
 
                 }
@@ -93,14 +93,14 @@ namespace AmmoTweaks
                 if (Settings.Renommage.Renommer) ammo.Name = RenameAmmo(ammo);
             }
 
-            if (Settings.Loot.Mult != 1)
+            if (Settings.Butin.Multiplicateur != 1)
             {
                 if (Skyrim.GameSetting.iArrowInventoryChance.TryResolve(state.LinkCache, out var gmst))
                 {
                     var modifiedGmst = state.PatchMod.GameSettings.GetOrAddAsOverride(gmst);
 
                     int data = ((GameSettingInt)modifiedGmst).Data.GetValueOrDefault();
-                    int newData = (int)Math.Round(data * Settings.Loot.Mult);
+                    int newData = (int)Math.Round(data * Settings.Butin.Multiplicateur);
                     ((GameSettingInt)modifiedGmst).Data = newData < 100 ? newData : 100;
                     Console.WriteLine($"Setting iArrowInventoryChance from {data} to {(newData < 100 ? newData : 100)}");
                 }
@@ -114,7 +114,7 @@ namespace AmmoTweaks
                         if (modValue.EntryPoint == APerkEntryPointEffect.EntryType.ModRecoverArrowChance)
                         {
                             var value = modValue.Value ?? 0;
-                            var newValue = (float)Math.Round(value * Settings.Loot.Mult);
+                            var newValue = (float)Math.Round(value * Settings.Butin.Multiplicateur);
                             modValue.Value = newValue < 100 ? newValue : 100;
                             Console.WriteLine($"Setting {modifiedPerk.Name} chance from {value} to {(newValue < 100 ? newValue : 100)}");
                         }
