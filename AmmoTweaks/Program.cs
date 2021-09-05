@@ -90,7 +90,7 @@ namespace AmmoTweaks
 
                 }
 
-                if (Settings.Renaming.DoRenaming) ammo.Name = RenameAmmo(ammo);
+                if (Settings.Renommage.Renommer) ammo.Name = RenameAmmo(ammo);
             }
 
             if (Settings.Loot.Mult != 1)
@@ -150,9 +150,9 @@ namespace AmmoTweaks
             {
                 return name;
             }
-            name = prefix + Settings.Renaming.Separator + Regex.Replace(name, pattern, String.Empty);
+            name = prefix + Settings.Renommage.Separator + Regex.Replace(name, pattern, String.Empty);
             name = name.Trim(' ');
-            Console.WriteLine($"Renaming {oldname} to {name}.");
+            Console.WriteLine($"Renommage {oldname} to {name}.");
             return name;
         }
     }
