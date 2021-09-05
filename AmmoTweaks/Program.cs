@@ -44,8 +44,8 @@ namespace AmmoTweaks
                 if (!ammogetter.Flags.HasFlag(Ammunition.Flag.NonPlayable))
                 {
                     patchammo.Add(ammogetter);
-                    var dmg = ammogetter.Damage;
-                    if (ammogetter.Damage == 0) continue;
+                    var dmg = ammogetter.Degats;
+                    if (ammogetter.Degats == 0) continue;
                     if (dmg < vmin) vmin = dmg;
                     if (dmg > vmax && dmg <= Settings.Degats.DegatsMax) vmax = dmg;
                     if (dmg > Settings.Degats.DegatsMax && ammogetter.Name?.String is string name) overpowered.Add(name);
