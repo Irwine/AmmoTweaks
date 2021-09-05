@@ -1,4 +1,4 @@
-using Mutagen.Bethesda.Synthesis.Settings;
+musing Mutagen.Bethesda.Synthesis.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace AmmoTweaks.Settings
     public class RenamingSettings
     {
         [SynthesisOrder]
-        public bool DoRenaming;
+        public bool Renommer;
 
         [SynthesisOrder]
         public string Separator = " - ";
