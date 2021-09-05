@@ -37,8 +37,8 @@ namespace AmmoTweaks
 
         public static void RunPatch(IPatcherState<ISkyrimMod, ISkyrimModGetter> state)
         {
-            float vmin = Settings.Damage.MaxDamage;
-            float vmax = Settings.Damage.MinDamage;
+            float vmin = Settings.Degats.DegatsMax;
+            float vmax = Settings.Degats.DegatsMin;
             foreach (var ammogetter in state.LoadOrder.PriorityOrder.Ammunition().WinningOverrides())
             {
                 if (!ammogetter.Flags.HasFlag(Ammunition.Flag.NonPlayable))
@@ -47,8 +47,8 @@ namespace AmmoTweaks
                     var dmg = ammogetter.Damage;
                     if (ammogetter.Damage == 0) continue;
                     if (dmg < vmin) vmin = dmg;
-                    if (dmg > vmax && dmg <= Settings.Damage.MaxDamage) vmax = dmg;
-                    if (dmg > Settings.Damage.MaxDamage && ammogetter.Name?.String is string name) overpowered.Add(name);
+                    if (dmg > vmax && dmg <= Settings.Degats.DegatsMax) vmax = dmg;
+                    if (dmg > Settings.Degats.DegatsMax && ammogetter.Name?.String is string name) overpowered.Add(name);
                 }
             }
 
@@ -63,11 +63,11 @@ namespace AmmoTweaks
                     ammo.Name = Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes(i18nAmmoName));
                 }
 
-                if (Settings.Damage.DoRescaling && ammo.Damage != 0)
+                if (Settings.Degats.Reechelonner && ammo.Damage != 0)
                 {
                     var dmg = ammo.Damage;
-                    if (dmg > Settings.Damage.MaxDamage) ammo.Damage = Settings.Damage.MaxDamage;
-                    else ammo.Damage = (float)Math.Round(((ammo.Damage - vmin) / (vmax - vmin)) * (Settings.Damage.MaxDamage - Settings.Damage.MinDamage) + Settings.Damage.MinDamage);
+                    if (dmg > Settings.Degats.DegatsMax) ammo.Damage = Settings.Degats.DegatsMax;
+                    else ammo.Damage = (float)Math.Round(((ammo.Damage - vmin) / (vmax - vmin)) * (Settings.Degats.DegatsMax - Settings.Degats.DegatsMin) + Settings.Damage.DegatsMin);
                     Console.WriteLine($"Changing {ammo.Name} damage from {dmg} to {ammo.Damage}.");
                 }
 
@@ -150,7 +150,7 @@ namespace AmmoTweaks
             {
                 return name;
             }
-            name = prefix + Settings.Renommage.Separator + Regex.Replace(name, pattern, String.Empty);
+            name = prefix + Settings.Renommage.Separateur + Regex.Replace(name, pattern, String.Empty);
             name = name.Trim(' ');
             Console.WriteLine($"Renommage {oldname} to {name}.");
             return name;
