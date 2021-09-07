@@ -11,7 +11,7 @@ namespace AmmoTweaks.Settings
     public class AmmoTweaksSettings
     {
         [SynthesisOrder]
-        [SettingName("Dégats")]
+        [SettingName("Dégâts")]
         public DamageSettings Damage = new();
 
         [SynthesisOrder]
