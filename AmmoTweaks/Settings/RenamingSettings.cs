@@ -10,9 +10,11 @@ namespace AmmoTweaks.Settings
     public class RenamingSettings
     {
         [SynthesisOrder]
-        public bool Renommer;
+        [SettingName("Renommer")]
+        public bool DoRenaming;
 
         [SynthesisOrder]
-        public string Separateur = " - ";
+        [SettingName("Séparateur")]
+        public string Separator = " - ";
     }
 }
