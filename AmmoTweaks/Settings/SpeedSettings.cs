@@ -10,15 +10,19 @@ namespace AmmoTweaks.Settings
     public class SpeedSettings
     {
         [SynthesisOrder]
-        public bool ModifierProjectiles = true;
+        [SettingName("Modifier les projectiles")]
+        public bool DoSpeedChanges = true;
 
         [SynthesisOrder]
-        public float VitesseFleches = 5400;
+        [SettingName("Vitesse des flèches")]
+        public float ArrowSpeed = 5400;
 
         [SynthesisOrder]
-        public float VitesseCarreau = 8100;
+        [SettingName("Vitesse des carreaux")]
+        public float BoltSpeed = 8100;
 
         [SynthesisOrder]
-        public float Gravite = 0.2f;
+        [SettingName("Gravité")]
+        public float Gravity = 0.2f;
     }
 }
