@@ -1,10 +1,10 @@
 using Mutagen.Bethesda.Synthesis.Settings;
+using Mutagen.Bethesda.WPF.Reflection.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Mutagen.Bethesda.Skyrim;
 
 namespace AmmoTweaks.Settings
 {
