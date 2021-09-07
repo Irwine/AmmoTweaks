@@ -11,7 +11,7 @@ namespace AmmoTweaks.Settings
     public class DamageSettings
     {
         [SynthesisOrder]
-        [SettingName("Reechelonner")]
+        [SettingName("Rééchelonner")]
         public bool DoRescaling = true;
 
         [SynthesisOrder]
