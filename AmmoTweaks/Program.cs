@@ -37,8 +37,8 @@ namespace AmmoTweaks
 
         public static void RunPatch(IPatcherState<ISkyrimMod, ISkyrimModGetter> state)
         {
-            float vmin = Settings.Degats.DegatsMax;
-            float vmax = Settings.Degats.DegatsMin;
+            float vmin = Settings.Damage.MaxDamage;
+            float vmax = Settings.Damage.MinDamage;
             foreach (var ammogetter in state.LoadOrder.PriorityOrder.Ammunition().WinningOverrides())
             {
                 if (!ammogetter.Flags.HasFlag(Ammunition.Flag.NonPlayable))
@@ -47,8 +47,8 @@ namespace AmmoTweaks
                     var dmg = ammogetter.Damage;
                     if (ammogetter.Damage == 0) continue;
                     if (dmg < vmin) vmin = dmg;
-                    if (dmg > vmax && dmg <= Settings.Degats.DegatsMax) vmax = dmg;
-                    if (dmg > Settings.Degats.DegatsMax && ammogetter.Name?.String is string name) overpowered.Add(name);
+                    if (dmg > vmax && dmg <= Settings.Damage.MaxDamage) vmax = dmg;
+                    if (dmg > Settings.Damage.MaxDamage && ammogetter.Name?.String is string name) overpowered.Add(name);
                 }
             }
 
@@ -63,44 +63,44 @@ namespace AmmoTweaks
                     ammo.Name = Encoding.GetEncoding("ISO-8859-1").GetString(Encoding.UTF8.GetBytes(i18nAmmoName));
                 }
 
-                if (Settings.Degats.Reechelonner && ammo.Damage != 0)
+                if (Settings.Damage.DoRescaling && ammo.Damage != 0)
                 {
                     var dmg = ammo.Damage;
-                    if (dmg > Settings.Degats.DegatsMax) ammo.Damage = Settings.Degats.DegatsMax;
-                    else ammo.Damage = (float)Math.Round(((ammo.Damage - vmin) / (vmax - vmin)) * (Settings.Degats.DegatsMax - Settings.Degats.DegatsMin) + Settings.Degats.DegatsMin);
+                    if (dmg > Settings.Damage.MaxDamage) ammo.Damage = Settings.Damage.MaxDamage;
+                    else ammo.Damage = (float)Math.Round(((ammo.Damage - vmin) / (vmax - vmin)) * (Settings.Damage.MaxDamage - Settings.Damage.MinDamage) + Settings.Damage.MinDamage);
                     Console.WriteLine($"Changing {ammo.Name} damage from {dmg} to {ammo.Damage}.");
                 }
 
-                if (Settings.Vitesse.ModifierProjectiles && !blacklist.Contains(ammo.Projectile) && ammo.Projectile.TryResolve(state.LinkCache, out var proj)
-                        && (proj.Gravity != Settings.Vitesse.Gravite
-                        || (proj.Speed != Settings.Vitesse.VitesseFleches && ammo.Flags.HasFlag(Ammunition.Flag.NonBolt))
-                        || (proj.Speed != Settings.Vitesse.VitesseCarreau && !ammo.Flags.HasFlag(Ammunition.Flag.NonBolt))))
+                if (Settings.Speed.DoSpeedChanges && !blacklist.Contains(ammo.Projectile) && ammo.Projectile.TryResolve(state.LinkCache, out var proj)
+                        && (proj.Gravity != Settings.Speed.Gravity
+                        || (proj.Speed != Settings.Speed.ArrowSpeed && ammo.Flags.HasFlag(Ammunition.Flag.NonBolt))
+                        || (proj.Speed != Settings.Speed.BoltSpeed && !ammo.Flags.HasFlag(Ammunition.Flag.NonBolt))))
                 {
                     var projectile = state.PatchMod.Projectiles.GetOrAddAsOverride(proj);
                     Console.WriteLine($"Adjusting {proj.Name} projectile.");
-                    projectile.Gravity = Settings.Vitesse.Gravite;
+                    projectile.Gravity = Settings.Speed.Gravity;
                     if (ammo.Flags.HasFlag(Ammunition.Flag.NonBolt))
                     {
-                        projectile.Speed = Settings.Vitesse.VitesseFleches;
+                        projectile.Speed = Settings.Speed.ArrowSpeed;
                     }
                     else
                     {
-                        projectile.Speed = Settings.Vitesse.VitesseCarreau;
+                        projectile.Speed = Settings.Speed.BoltSpeed;
                     }
 
                 }
 
-                if (Settings.Renommage.Renommer) ammo.Name = RenameAmmo(ammo);
+                if (Settings.Renaming.DoRenaming) ammo.Name = RenameAmmo(ammo);
             }
 
-            if (Settings.Butin.Multiplicateur != 1)
+            if (Settings.Loot.Mult != 1)
             {
                 if (Skyrim.GameSetting.iArrowInventoryChance.TryResolve(state.LinkCache, out var gmst))
                 {
                     var modifiedGmst = state.PatchMod.GameSettings.GetOrAddAsOverride(gmst);
 
                     int data = ((GameSettingInt)modifiedGmst).Data.GetValueOrDefault();
-                    int newData = (int)Math.Round(data * Settings.Butin.Multiplicateur);
+                    int newData = (int)Math.Round(data * Settings.Loot.Mult);
                     ((GameSettingInt)modifiedGmst).Data = newData < 100 ? newData : 100;
                     Console.WriteLine($"Setting iArrowInventoryChance from {data} to {(newData < 100 ? newData : 100)}");
                 }
@@ -114,7 +114,7 @@ namespace AmmoTweaks
                         if (modValue.EntryPoint == APerkEntryPointEffect.EntryType.ModRecoverArrowChance)
                         {
                             var value = modValue.Value ?? 0;
-                            var newValue = (float)Math.Round(value * Settings.Butin.Multiplicateur);
+                            var newValue = (float)Math.Round(value * Settings.Loot.Mult);
                             modValue.Value = newValue < 100 ? newValue : 100;
                             Console.WriteLine($"Setting {modifiedPerk.Name} chance from {value} to {(newValue < 100 ? newValue : 100)}");
                         }
@@ -150,9 +150,9 @@ namespace AmmoTweaks
             {
                 return name;
             }
-            name = prefix + Settings.Renommage.Separateur + Regex.Replace(name, pattern, String.Empty);
+            name = prefix + Settings.Renaming.Separator + Regex.Replace(name, pattern, String.Empty);
             name = name.Trim(' ');
-            Console.WriteLine($"Renommage {oldname} to {name}.");
+            Console.WriteLine($"Renaming {oldname} to {name}.");
             return name;
         }
     }
