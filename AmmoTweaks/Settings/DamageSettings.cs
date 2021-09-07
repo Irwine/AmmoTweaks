@@ -10,13 +10,16 @@ namespace AmmoTweaks.Settings
     public class DamageSettings
     {
         [SynthesisOrder]
-        public bool Reechelonner = true;
+        [SettingName("Reechelonner")]
+        public bool DoRescaling = true;
 
         [SynthesisOrder]
-        public float DegatsMin = 8;
+        [SettingName("Dégâts minimaux")]
+        public float MinDamage = 8;
 
         [SynthesisOrder]
-        public float DegatsMax = 35;
+        [SettingName("Dégâts maximaux")]
+        public float MaxDamage = 35;
 
     }
 }
