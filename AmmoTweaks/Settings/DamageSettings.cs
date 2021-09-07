@@ -1,4 +1,5 @@
 using Mutagen.Bethesda.Synthesis.Settings;
+using Mutagen.Bethesda.Skyrim;
 using System;
 using System.Collections.Generic;
 using System.Linq;
